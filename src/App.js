@@ -23,96 +23,130 @@ const zenbinTheme = createMuiTheme({
 	}
 });
 
-function App() {
-	return (
-		<ThemeProvider theme={zenbinTheme}>
-			<Box style={{ width:'100vw', minHeight:'100vh', backgroundColor:'grey' }}>
-				<AppBar position='static'>
-					<Toolbar>
-						<Typography variant='h5'> Zenbin </Typography>
-					</Toolbar>
-				</AppBar>
-				
-				<Container style={{ padding:'12px'}}>
-					<Grid container justify='center' spacing={3}>
-						<Grid item >
-							<Card style={{ height:'450px', width:'300px' }}>
-								<CardHeader style={{ backgroundColor: '#aaaaaa' }}
-									title="Create a new Zen"
-									subheader="Breathe, Create, Release"
-								/>
-								<CardContent>
-									<TextField 
-										fullWidth='true'
-										label='Zen Title'
-										placeholder='<UNTITLED>'
-										variant='filled'
-										style={{ marginBottom: '12px' }}
-										/>
-									<TextField
-										fullWidth='true'
-										label='Zen Body'
-										placeholder='<YOUR THOUGHTS>'
-										multiline='true'
-										rows='9'
-										variant='outlined'
+class App extends React.Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			zens: null,
+			zensFetched: false,
+			newZenContent: null,
+			newZenTitle: null
+		}
+
+		this.handleTitleChange = this.handleTitleChange.bind(this)
+		this.handleContentChange = this.handleContentChange.bind(this)
+		this.handleSubmit = this.handleSubmit.bind(this)
+	}
+	/* This is whack */
+	handleTitleChange(event) {
+		this.setState({newZenTitle: event.target.value})
+	}
+
+	handleContentChange(event) {
+		this.setState({newZenContent: event.target.value})
+	}
+
+	handleSubmit(event) {
+		alert('title: ' + this.state.newZenTitle);
+		alert('content: ' + this.state.newZenContent);
+		event.preventDefault();
+	}
+
+	render(){
+		return (
+			<ThemeProvider theme={zenbinTheme}>
+				<Box style={{ width:'100vw', minHeight:'100vh', backgroundColor:'grey' }}>
+					<AppBar position='static'>
+						<Toolbar>
+							<Typography variant='h5'> Zenbin </Typography>
+						</Toolbar>
+					</AppBar>
+					
+					<Container style={{ padding:'12px'}}>
+						<Grid container justify='center' spacing={3}>
+							<Grid item >
+								<Card style={{ height:'450px', width:'300px' }}>
+									<CardHeader style={{ backgroundColor: '#aaaaaa' }}
+										title="Create a new Zen"
+										subheader="Breathe, Create, Release"
 									/>
-								</CardContent>
-								<CardActions style={{ paddingTop: '0px', paddingBottom: '0px' }}>
-									<Button variant='contained' color='primary' fullWidth='true'>
-										Submit
-									</Button>
-								</CardActions>
-							</Card>
-						</Grid>
+									<CardContent>
+										<TextField 
+											fullWidth='true'
+											label='Zen Title'
+											placeholder='<UNTITLED>'
+											value={this.state.newZenTitle}
+											variant='filled'
+											onChange={this.handleTitleChange}
+											style={{ marginBottom: '12px' }}
+											/>
+										<TextField
+											fullWidth='true'
+											label='Zen Body'
+											placeholder='<YOUR THOUGHTS>'
+											value={this.state.newZenContent}
+											onChange={this.handleContentChange}
+											multiline='true'
+											rows='9'
+											variant='outlined'
+										/>
+									</CardContent>
+									<CardActions style={{ paddingTop: '0px', paddingBottom: '0px' }}>
+										<Button variant='contained' color='primary' fullWidth='true' onClick={this.handleSubmit}>
+											Submit
+										</Button>
+									</CardActions>
+								</Card>
+							</Grid>
 
-						<Grid item >
-							<Card style={{ minHeight:'450px', minWidth:'300px', maxWidth:'400px' }}>
-								<CardHeader style={{ backgroundColor:'#aaaaaa' }}
-									title="This is a zen example"
-									subheader="05/02/1993 19:47:03"
-								/>
-								<CardContent>
-									<Typography >
-										This is Zenbin!
-									</Typography>
-								</CardContent>
-							</Card>
-						</Grid>
+							<Grid item >
+								<Card style={{ minHeight:'450px', minWidth:'300px', maxWidth:'400px' }}>
+									<CardHeader style={{ backgroundColor:'#aaaaaa' }}
+										title="This is a zen example"
+										subheader="05/02/1993 19:47:03"
+									/>
+									<CardContent>
+										<Typography >
+											This is Zenbin!
+										</Typography>
+									</CardContent>
+								</Card>
+							</Grid>
 
-						<Grid item >
-							<Card style={{ minHeight:'450px', minWidth:'300px', maxWidth:'400px' }}>
-								<CardHeader style={{ backgroundColor:'#aaaaaa' }}
-									title="This is a zen example"
-									subheader="05/02/1993 19:47:03"
-								/>
-								<CardContent>
-									<Typography >
-										This is Zenbin!
-									</Typography>
-								</CardContent>
-							</Card>
-						</Grid>
+							<Grid item >
+								<Card style={{ minHeight:'450px', minWidth:'300px', maxWidth:'400px' }}>
+									<CardHeader style={{ backgroundColor:'#aaaaaa' }}
+										title="This is a zen example"
+										subheader="05/02/1993 19:47:03"
+									/>
+									<CardContent>
+										<Typography >
+											This is Zenbin!
+										</Typography>
+									</CardContent>
+								</Card>
+							</Grid>
 
-						<Grid item >
-							<Card style={{ minHeight:'450px', minWidth:'300px', maxWidth:'400px' }}>
-								<CardHeader style={{ backgroundColor:'#aaaaaa' }}
-									title="This is a zen example"
-									subheader="05/02/1993 19:47:03"
-								/>
-								<CardContent>
-									<Typography >
-										This is Zenbin!
-									</Typography>
-								</CardContent>
-							</Card>
-						</Grid>
+							<Grid item >
+								<Card style={{ minHeight:'450px', minWidth:'300px', maxWidth:'400px' }}>
+									<CardHeader style={{ backgroundColor:'#aaaaaa' }}
+										title="This is a zen example"
+										subheader="05/02/1993 19:47:03"
+									/>
+									<CardContent>
+										<Typography >
+											This is Zenbin!
+										</Typography>
+									</CardContent>
+								</Card>
+							</Grid>
 
-					</Grid>
-				</Container>
-			</Box>
-		</ThemeProvider>
-  );
+						</Grid>
+					</Container>
+				</Box>
+			</ThemeProvider>
+		)
+	}
 }
 
 export default App;
