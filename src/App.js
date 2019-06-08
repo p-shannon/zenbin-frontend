@@ -45,10 +45,26 @@ class App extends React.Component {
 	handleContentChange(event) {
 		this.setState({newZenContent: event.target.value})
 	}
-
+	/*This is worse*/
 	handleSubmit(event) {
-		alert('title: ' + this.state.newZenTitle);
-		alert('content: ' + this.state.newZenContent);
+		console.log('click!')
+		fetch('http://zenbin-api.venusarc.net/zens/',{
+			method: 'post',
+			body: JSON.stringify({
+				title: this.state.newZenTitle,
+				content: this.state.newZenContent
+			}),
+			headers: {
+				'content-type': 'application/json'
+			}
+		}).then(newZen => {
+			alert(newZen)
+			alert("Sorry for the crudeness, please check 'http://zenbin-api.venusarc.net/zens/all' to see your post in the database itself!")
+		})
+		this.setState({
+			newZenTitle: null,
+			newZenContent: null,
+		})
 		event.preventDefault();
 	}
 
