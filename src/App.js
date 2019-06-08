@@ -50,6 +50,7 @@ class App extends React.Component {
 		console.log('click!')
 		fetch('http://zenbin-api.venusarc.net/zens/',{
 			method: 'post',
+			mode: 'cors',
 			body: JSON.stringify({
 				title: this.state.newZenTitle,
 				content: this.state.newZenContent
