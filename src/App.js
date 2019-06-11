@@ -50,7 +50,6 @@ class App extends React.Component {
 		console.log('click!')
 		fetch('http://zenbin-api.venusarc.net/zens/',{
 			method: 'post',
-			mode: 'cors',
 			body: JSON.stringify({
 				title: this.state.newZenTitle,
 				content: this.state.newZenContent
@@ -58,9 +57,10 @@ class App extends React.Component {
 			headers: {
 				'content-type': 'application/json'
 			}
-		}).then(newZen => {
-			alert(newZen)
-			alert("Sorry for the crudeness, please check 'http://zenbin-api.venusarc.net/zens/all' to see your post in the database itself!")
+		}).then(response => response.json())
+			.then(newZen => {
+			alert(JSON.stringify(newZen.zen))
+			console.log(newZen)
 		})
 		this.setState({
 			newZenTitle: null,
