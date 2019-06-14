@@ -73,12 +73,12 @@ class App extends React.Component {
 
 	fetchZens(){
 		console.log('Fetching zens.')
-		fetch('http://zenbin-api.venusarc.net/zens/all')
+		fetch('http://zenbin-api.venusarc.net/zens/')
 			.then(response => response.json())
 			.then(data => {
 				console.log(data)
 				this.setState({
-					zens: data.zens,
+					zens: data.validZens,
 					zensFetched: true
 				})
 			})
@@ -146,6 +146,9 @@ class App extends React.Component {
 								console.log(zen.id+' Lifespan   = ' + lifespan)
 								console.log(zen.id+' Countdown  = ' + countdown)
 								console.log(zen.id+' Visibility = ' + visibilityPercentage)
+								if (visibilityPercentage <= 0){
+									return false
+								}
 								return(
 									<Grid item >
 										<Card style={{ height: '450px', width: '300px'}}>
