@@ -30,12 +30,14 @@ class App extends React.Component {
 			zens: null,
 			zensFetched: false,
 			newZenContent: null,
-			newZenTitle: null
+			newZenTitle: null,
+			updater: null
 		}
 
 		this.handleTitleChange = this.handleTitleChange.bind(this)
 		this.handleContentChange = this.handleContentChange.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
+		this.fetchZens = this.fetchZens.bind(this)
 	}
 	/* This is whack */
 	handleTitleChange(event) {
@@ -59,14 +61,34 @@ class App extends React.Component {
 			}
 		}).then(response => response.json())
 			.then(newZen => {
-			alert(JSON.stringify(newZen.zen))
 			console.log(newZen)
 		})
 		this.setState({
 			newZenTitle: null,
 			newZenContent: null,
+			zensFetched: false
 		})
-		event.preventDefault();
+		event.preventDefault()
+	}
+
+	fetchZens(){
+		console.log('Fetching zens.')
+		fetch('http://zenbin-api.venusarc.net/zens/all')
+			.then(response => response.json())
+			.then(data => {
+				console.log(data)
+				this.setState({
+					zens: data.zens,
+					zensFetched: true
+				})
+			})
+	}
+
+	componentWillMount(){
+		if (!this.state.zensFetched) {
+			this.fetchZens()
+		}
+		this.setState({updater: setInterval(this.fetchZens,15000)})
 	}
 
 	render(){
@@ -116,10 +138,29 @@ class App extends React.Component {
 								</Card>
 							</Grid>
 
+							{this.state.zens ? (this.state.zens.slice(0).reverse().map(zen => {
+								let displayedStamp = new Date(Number(zen.time_stamp))
+								return(
+									<Grid item >
+										<Card style={{ height: '450px', width: '300px' }}>
+											<CardHeader style={{ backgroundColor: '#aaaaaa' }}
+												title={zen.title}
+												subheader={displayedStamp.toLocaleString()}
+											/>
+											<CardContent>
+												<Typography >{/* Might need an overflow scroll here.*/}
+													{zen.content}
+												</Typography>
+											</CardContent>
+										</Card>
+									</Grid>
+								)
+							})) : null}
+
 							<Grid item >
 								<Card style={{ minHeight:'450px', minWidth:'300px', maxWidth:'400px' }}>
 									<CardHeader style={{ backgroundColor:'#aaaaaa' }}
-										title="This is a zen example"
+										title={this.state.zens ? this.state.zens[0].title : "Test Failed"}
 										subheader="05/02/1993 19:47:03"
 									/>
 									<CardContent>
