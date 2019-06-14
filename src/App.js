@@ -140,15 +140,21 @@ class App extends React.Component {
 
 							{this.state.zens ? (this.state.zens.slice(0).reverse().map(zen => {
 								let displayedStamp = new Date(Number(zen.time_stamp))
+								let lifespan = ((Number(zen.time_stamp)-(Number(zen.expiration_date)))/-1000)
+								let countdown = ((Date.now()-(Number(zen.expiration_date)))/1000)
+								let visibilityPercentage = (countdown/lifespan)*-10
+								console.log(zen.id+' Lifespan   = ' + lifespan)
+								console.log(zen.id+' Countdown  = ' + countdown)
+								console.log(zen.id+' Visibility = ' + visibilityPercentage)
 								return(
 									<Grid item >
-										<Card style={{ height: '450px', width: '300px' }}>
+										<Card style={{ height: '450px', width: '300px'}}>
 											<CardHeader style={{ backgroundColor: '#aaaaaa' }}
 												title={zen.title}
 												subheader={displayedStamp.toLocaleString()}
 											/>
 											<CardContent>
-												<Typography >{/* Might need an overflow scroll here.*/}
+												<Typography style={{opacity: (visibilityPercentage/10), overflow: 'scroll'}}>{/* Might need an overflow scroll here.*/}
 													{zen.content}
 												</Typography>
 											</CardContent>
