@@ -157,47 +157,6 @@ class App extends React.Component {
 								)
 							})) : null}
 
-							<Grid item >
-								<Card style={{ minHeight:'450px', minWidth:'300px', maxWidth:'400px' }}>
-									<CardHeader style={{ backgroundColor:'#aaaaaa' }}
-										title={this.state.zens ? this.state.zens[0].title : "Test Failed"}
-										subheader="05/02/1993 19:47:03"
-									/>
-									<CardContent>
-										<Typography >
-											This is Zenbin!
-										</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
-
-							<Grid item >
-								<Card style={{ minHeight:'450px', minWidth:'300px', maxWidth:'400px' }}>
-									<CardHeader style={{ backgroundColor:'#aaaaaa' }}
-										title="This is a zen example"
-										subheader="05/02/1993 19:47:03"
-									/>
-									<CardContent>
-										<Typography >
-											This is Zenbin!
-										</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
-
-							<Grid item >
-								<Card style={{ minHeight:'450px', minWidth:'300px', maxWidth:'400px' }}>
-									<CardHeader style={{ backgroundColor:'#aaaaaa' }}
-										title="This is a zen example"
-										subheader="05/02/1993 19:47:03"
-									/>
-									<CardContent>
-										<Typography >
-											This is Zenbin!
-										</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
 
 						</Grid>
 					</Container>
