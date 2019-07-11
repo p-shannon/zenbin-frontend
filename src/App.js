@@ -15,6 +15,8 @@ import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
+import ZenPost from './components/zenPost';
+
 const zenbinTheme = createMuiTheme({
 	palette:{
 		primary: {
@@ -102,6 +104,7 @@ class App extends React.Component {
 					</AppBar>
 					
 					<Container style={{ padding:'12px'}}>
+						<ZenPost/>
 						<Grid container justify='center' spacing={3}>
 							<Grid item >
 								<Card style={{ height:'450px', width:'300px' }}>
