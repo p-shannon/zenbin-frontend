@@ -104,7 +104,6 @@ class App extends React.Component {
 					</AppBar>
 					
 					<Container style={{ padding:'12px'}}>
-						<ZenPost/>
 						<Grid container justify='center' spacing={3}>
 							<Grid item >
 								<Card style={{ height:'450px', width:'300px' }}>
@@ -142,7 +141,7 @@ class App extends React.Component {
 							</Grid>
 
 							{this.state.zens ? (this.state.zens.slice(0).reverse().map(zen => {
-								let displayedStamp = new Date(Number(zen.time_stamp))
+								let displayedStamp = new Date(Number(zen.time_stamp)).toLocaleString()
 								let lifespan = ((Number(zen.time_stamp)-(Number(zen.expiration_date)))/-1000)
 								let countdown = ((Date.now()-(Number(zen.expiration_date)))/1000)
 								let visibilityPercentage = (countdown/lifespan)*-10
@@ -153,19 +152,11 @@ class App extends React.Component {
 									return false
 								}
 								return(
-									<Grid item >
-										<Card style={{ height: '450px', width: '300px'}}>
-											<CardHeader style={{ backgroundColor: '#aaaaaa' }}
-												title={zen.title}
-												subheader={displayedStamp.toLocaleString()}
-											/>
-											<CardContent>
-												<Typography style={{opacity: (visibilityPercentage/10), overflow: 'scroll'}}>{/* Might need an overflow scroll here.*/}
-													{zen.content}
-												</Typography>
-											</CardContent>
-										</Card>
-									</Grid>
+									<ZenPost 
+										title={zen.title} 
+										timestamp={displayedStamp}
+										content={zen.content}
+									/>
 								)
 							})) : null}
 

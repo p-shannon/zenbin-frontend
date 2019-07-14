@@ -15,7 +15,19 @@ class zenPost extends React.Component {
 
 	render(){
 		return (
-			
+			<Grid item >
+				<Card style={{ height: '450px', width: '300px'}}>
+					<CardHeader style={{ backgroundColor: '#aaaaaa' }}
+											title={this.props.title}
+											subheader={this.props.timestamp}
+					/>
+					<CardContent>
+						<Typography style={{opacity: (10/10), overflow: 'scroll'}}>{/* Might need an overflow scroll here.*/}
+							{this.props.content}
+						</Typography>
+					</CardContent>
+				</Card>
+			</Grid>
 		)
 	}
 }
