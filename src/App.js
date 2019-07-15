@@ -142,20 +142,17 @@ class App extends React.Component {
 
 							{this.state.zens ? (this.state.zens.slice(0).reverse().map(zen => {
 								let displayedStamp = new Date(Number(zen.time_stamp)).toLocaleString()
-								let lifespan = ((Number(zen.time_stamp)-(Number(zen.expiration_date)))/-1000)
-								let countdown = ((Date.now()-(Number(zen.expiration_date)))/1000)
-								let visibilityPercentage = (countdown/lifespan)*-10
-								console.log(zen.id+' Lifespan   = ' + lifespan)
-								console.log(zen.id+' Countdown  = ' + countdown)
-								console.log(zen.id+' Visibility = ' + visibilityPercentage)
-								if (visibilityPercentage <= 0){
-									return false
-								}
+								//let lifespan = ((Number(zen.time_stamp)-(Number(zen.expiration_date)))/-1000)
+								//let countdown = ((Date.now()-(Number(zen.expiration_date)))/1000)
+								//let visibilityPercentage = (countdown/lifespan)*-10
 								return(
 									<ZenPost 
 										title={zen.title} 
 										timestamp={displayedStamp}
 										content={zen.content}
+										timestampInt={zen.time_stamp}
+										expirationDate={zen.expiration_date}
+										id={zen.id}
 									/>
 								)
 							})) : null}
