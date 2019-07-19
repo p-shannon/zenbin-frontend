@@ -16,6 +16,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import ZenPost from './components/zenPost';
+import ZenForm from './components/zenForm';
 
 const zenbinTheme = createMuiTheme({
 	palette:{
@@ -90,7 +91,7 @@ class App extends React.Component {
 		if (!this.state.zensFetched) {
 			this.fetchZens()
 		}
-		this.setState({updater: setInterval(this.fetchZens,15000)})
+		this.setState({updater: setInterval(this.fetchZens,5000)})
 	}
 
 	render(){
@@ -105,40 +106,10 @@ class App extends React.Component {
 					
 					<Container style={{ padding:'12px'}}>
 						<Grid container justify='center' spacing={3}>
-							<Grid item >
-								<Card style={{ height:'450px', width:'300px' }}>
-									<CardHeader style={{ backgroundColor: '#aaaaaa' }}
-										title="Create a new Zen"
-										subheader="Breathe, Create, Release"
-									/>
-									<CardContent>
-										<TextField 
-											fullWidth='true'
-											label='Zen Title'
-											placeholder='<UNTITLED>'
-											value={this.state.newZenTitle}
-											variant='filled'
-											onChange={this.handleTitleChange}
-											style={{ marginBottom: '12px' }}
-											/>
-										<TextField
-											fullWidth='true'
-											label='Zen Body'
-											placeholder='<YOUR THOUGHTS>'
-											value={this.state.newZenContent}
-											onChange={this.handleContentChange}
-											multiline='true'
-											rows='9'
-											variant='outlined'
-										/>
-									</CardContent>
-									<CardActions style={{ paddingTop: '0px', paddingBottom: '0px' }}>
-										<Button variant='contained' color='primary' fullWidth='true' onClick={this.handleSubmit}>
-											Submit
-										</Button>
-									</CardActions>
-								</Card>
-							</Grid>
+							
+							<ZenForm
+								fetchZens={this.fetchZens}
+							/>
 
 							{this.state.zens ? (this.state.zens.slice(0).reverse().map(zen => {
 								let displayedStamp = new Date(Number(zen.time_stamp)).toLocaleString()
