@@ -50,7 +50,9 @@ class zenPost extends React.Component {
 											subheader={this.props.timestamp}
 					/>
 					<CardContent>
-						<Typography style={{opacity: (this.state.visibility/10), overflow: 'scroll'}}>{/* Might need an overflow scroll here.*/}
+						<Typography style={{opacity: (this.state.visibility/10), 
+																overflowY: 'scroll'}}
+						>
 							{this.props.content}
 						</Typography>
 					</CardContent>
