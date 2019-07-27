@@ -2,18 +2,16 @@ import React from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 import ZenPost from './components/zenPost';
 import ZenForm from './components/zenForm';
@@ -34,13 +32,15 @@ class App extends React.Component {
 			zensFetched: false,
 			newZenContent: null,
 			newZenTitle: null,
-			updater: null
+			updater: null,
+			open: true
 		}
 
 		this.handleTitleChange = this.handleTitleChange.bind(this)
 		this.handleContentChange = this.handleContentChange.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.fetchZens = this.fetchZens.bind(this)
+		this.handleClose = this.handleClose.bind(this)
 	}
 	/* This is whack */
 	handleTitleChange(event) {
@@ -87,6 +87,10 @@ class App extends React.Component {
 			})
 	}
 
+	handleClose(){
+		this.setState({open:false});
+	}
+
 	componentWillMount(){
 		if (!this.state.zensFetched) {
 			this.fetchZens()
@@ -103,7 +107,39 @@ class App extends React.Component {
 							<Typography variant='h5'> Zenbin </Typography>
 						</Toolbar>
 					</AppBar>
-					
+
+					<Dialog 
+						open={this.state.open}
+						onClose={this.handleClose}
+					>
+						<div
+							style={{ height: '450px', width: '300px'}}
+						>
+							<DialogTitle 
+								style={{ backgroundColor: '#aaaaaa' }}
+							>
+								<Typography
+									variant='h5'
+								>
+									Zenbin
+								</Typography>
+								<Typography>
+									The beauty of letting go
+								</Typography>
+							</DialogTitle>
+							<DialogContent>
+								<Typography>
+									Posts on this app are meant to expire, much like a painting on a Buddha board. Experience the freedom of not having to create something worth while, while excersizing your creativity. You can also just use it for venting. Enough out of me, you go and be free.
+								</Typography>
+							</DialogContent>
+							<DialogActions style={{ paddingTop: '110px', paddingBottom: '0px' }}>
+								<Button variant='contained' color='primary' fullWidth='true' onClick={this.handleClose}>
+									I understand, thank you.
+								</Button>
+							</DialogActions>
+						</div>
+					</Dialog>
+
 					<Container style={{ padding:'12px'}}>
 						<Grid container justify='center' spacing={3}>
 							
