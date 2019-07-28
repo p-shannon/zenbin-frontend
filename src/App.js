@@ -33,7 +33,8 @@ class App extends React.Component {
 			newZenContent: null,
 			newZenTitle: null,
 			updater: null,
-			open: true
+			open: true,
+			closed: "false"
 		}
 
 		this.handleTitleChange = this.handleTitleChange.bind(this)
@@ -88,10 +89,17 @@ class App extends React.Component {
 	}
 
 	handleClose(){
-		this.setState({open:false});
+		this.setState({open:false, closed:"true"});
+		localStorage.setItem('closed','true');
 	}
 
 	componentWillMount(){
+
+		let closed = localStorage.getItem('closed') || 'false'
+		if (closed === 'true'){
+			this.setState({open:false})
+		}
+
 		if (!this.state.zensFetched) {
 			this.fetchZens()
 		}
